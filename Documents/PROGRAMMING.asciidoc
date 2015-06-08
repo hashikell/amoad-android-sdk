@@ -13,7 +13,7 @@ toc::[]
 :numbered:
 :sectnums:
 
-== バナー広告の導入
+== バナー広告
 表示広告種類は、画像・テキスト・HTMLの有無によって、以下の3タイプあります
 
 .広告の種類
@@ -33,7 +33,7 @@ toc::[]
 .1+|320px x 50px
 |===
 
-=== 広告の表示(XML利用)
+=== 表示(XML利用)
 レイアウトに<com.amoad.AMoAdView .../>を追加する
 
 .サンプルXML
@@ -80,7 +80,7 @@ SDKの機能を呼び出すために複数の箇所から参照しますので�
 .1+|android:background 2+|最初の広告情報が取れるまでに表示する画像を設定する
 |===
 
-=== 広告の表示(ソースコード利用)
+=== 表示(ソースコード利用)
 . 本SDKでは広告の生成をソースコードで行うこともできます。 +
 その場合でもシングルトン・パターンなどで生成を管理する必要はなく、 +
 各画面に同じ固有IDを設定することで広告を内部的に共有します
@@ -103,7 +103,7 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 ----
 
-=== 広告取得のコールバック
+=== コールバック
 広告の取得を通知する
 
 .サンプルコード
@@ -133,7 +133,7 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 ----
 
-=== 広告のローテーションの開始、停止
+=== ローテーションの開始、停止
 本SDKは、管理画面の「自動更新間隔」で指定された間隔で自動的に広告をローテーション表示します。 +
 ローテーションさせたくない場合やAdMob広告ネットワークメディエーション等の外部機能で +
 AMoAd SDKを制御する際は、管理画面の「自動更新間隔」に「0」を設定してください。
@@ -146,7 +146,7 @@ image:images/default_banner.png[width="400px"]
 
 . 広告枠の審査が完了すると、広告主から提供されている広告が配信されるようになります。
 
-== ネイティブApp広告の導入
+== ネイティブApp広告
 表示広告種類は、画像の有無、テキストの長さなどによって、以下の3タイプあります
 
 .ネイティブ広告の種類
@@ -159,7 +159,7 @@ image:images/default_banner.png[width="400px"]
 .1+|メイン画像＋テキスト
 |===
 
-=== 広告用のレイアウト作成
+=== レイアウト作成
 .下記表を参考にレイアウトを作成する
 [options="header"]
 |=======================
@@ -338,7 +338,7 @@ image:images/default_banner.png[width="400px"]
 </RelativeLayout>
 ----
 
-=== 広告の表示
+=== 表示
 
 .一行テキスト広告の実装
 [source, java]
@@ -402,7 +402,7 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 ----
 
-=== 広告の更新
+=== 更新
 
 該当するSIDのTAGの広告が更新されます。
 
@@ -411,7 +411,7 @@ protected void onCreate(Bundle savedInstanceState) {
 AMoAdNativeViewManager.getInstance(context).updateAd(SID, TAG);
 ----
 
-=== 広告のクリア
+=== クリア
 
 該当するSIDのTAGの広告がクリアされます。（テキストと画像が消える）
 
@@ -424,6 +424,16 @@ AMoAdNativeViewManager.getInstance(context).clearAd(SID, TAG);
 [source, java]
 ----
 AMoAdNativeViewManager.getInstance(context).clearAds(SID);
+----
+
+=== ダブルタップの設定
+[source, java]
+----
+AMoAdNativeViewCoder coder == new AMoAdNativeViewCoder();
+coder.setTouchType(AMoAdNativeViewCoder.TouchType.DoubleTap);
+
+View templateView == findViewById(R.id.templateView);
+AMoAdNativeViewManager.getInstance(this).renderAd(SID, TAG2, templateView, null, coder);
 ----
 
 === 広告の取得失敗を検知する
@@ -451,7 +461,7 @@ AMoAdNativeViewManager.getInstance(context).renderAd(sid, tag, templateView, new
 });
 ----
 
-=== レイアウトファイルを作成しないで広告を表示する方法
+=== レイアウトファイルの作らずに広告を表示する方法
 renderAd関数にテンプレートビューを渡すと
 テンプレートビューに広告が埋め込まれる。
 
@@ -476,16 +486,6 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 ----
 
-=== 広告のダブルタップの設定
-[source, java]
-----
-AMoAdNativeViewCoder coder == new AMoAdNativeViewCoder();
-coder.setTouchType(AMoAdNativeViewCoder.TouchType.DoubleTap);
-
-View templateView == findViewById(R.id.templateView);
-AMoAdNativeViewManager.getInstance(this).renderAd(SID, TAG2, templateView, null, coder);
-----
-
 === デバッグ方法
 
 .ログをコンソールに出力する
@@ -506,7 +506,7 @@ AMoAdLogger.getInstance().addAMoAdLoggerListener(new AMoAdLoggerListener() {
 });
 ----
 
-== リストビュー広告の導入
+== リストビュー広告
 表示広告種類は、画像の有無、テキストの長さなどによって、以下の3タイプあります
 
 .ネイティブ広告の種類
@@ -519,7 +519,7 @@ AMoAdLogger.getInstance().addAMoAdLoggerListener(new AMoAdLoggerListener() {
 .1+| メイン画像＋テキスト
 |===
 
-=== 広告用のレイアウト作成
+=== レイアウト作成
 
 .下記表を参考にレイアウトを作成する
 [options="header"]
@@ -699,7 +699,7 @@ AMoAdLogger.getInstance().addAMoAdLoggerListener(new AMoAdLoggerListener() {
 </RelativeLayout>
 ----
 
-=== 広告の表示
+=== 表示
 
 .一行テキスト広告の実装
 [source, java]
@@ -779,7 +779,7 @@ http://developer.android.com/reference/android/widget/AdapterView.html[AdapterVi
 http://developer.android.com/reference/android/widget/StackView.html[StackView] +
 http://developer.android.com/reference/android/widget/Gallery.html[Gallery] +
 
-=== 広告の更新
+=== 更新
 
 該当するSIDのTAGの広告が更新されます。
 
@@ -788,7 +788,7 @@ http://developer.android.com/reference/android/widget/Gallery.html[Gallery] +
 AMoAdNativeViewManager.getInstance(context).updateAd(SID, TAG);
 ----
 
-=== 広告のダブルタップの設定
+=== ダブルタップの設定
 [source, java]
 ----
 AMoAdNativeViewCoder coder == new AMoAdNativeViewCoder();
