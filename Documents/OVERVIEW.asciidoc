@@ -17,7 +17,7 @@ toc::[]
 自動更新間隔を設定することで広告の自動更新ができます。
 
 .広告例
-image:images/overview.banner.png[
+image:images/banner.png[
 "端末に表示する広告の例", width=600]
 
 === バナー広告の種類
