@@ -1,3 +1,19 @@
+:toc: macro
+:toc-title: 目次
+:toclevels: 4
+
+= AMoAd SDK for Android
+
+toc::[]
+
+:numbered!:
+:sectnums!:
+=== 　
+:numbered:
+:sectnums:
+
+== 変更履歴
+
 Ver 3.6.0::
 * アプリから追跡型広告の配信を制限するI/Fを追加しました。
 [source, java]
@@ -41,7 +57,8 @@ Ver 3.1.0 beta 6::
 . AMoAdLoggerの関数変更
 
 .クリック領域の設定:「android:tag="AMoAdNativeViewLink"」でクリックビューを設定する。
-```xml
+[source, xml]
+----
 // 広告のテンプレートレイアウトxml
 <RelativeLayout ... >
     ...
@@ -51,26 +68,28 @@ Ver 3.1.0 beta 6::
         android:text="アプリをダウンロードする" />
     ...
 </RelativeLayout>
-```
+----
 
 
 .AMoAdLoggerの関数変更<1>
-```java
+[source, java]
+----
 // 変更前
 AMoAdNativeViewManager#addAMoAdLoggerListener(listener);
 
 // 変更後
 AMoAdNativeViewManager#setAMoAdLoggerListener(listener);
-```
+----
 
 .AMoAdLoggerの関数変更<2>
-```java
+[source, java]
+----
 // 変更前
 AMoAdNativeViewManager#removeAMoAdLoggerListener(listener);
 
 // 変更後
 AMoAdNativeViewManager#setAMoAdLoggerListener(null);
-```
+----
 
 Ver 3.1.0 beta 5 hotfix1::
 * 広告をclearAdしても広告のクリックができるバグ対応
@@ -81,17 +100,20 @@ Ver 3.1.0 beta 5::
 . AMoAdNativeViewManagerクラスのインタフェース変更
 
 .広告の新しいクリア機能
-```java
+[source, java]
+----
 AMoAdNativeViewManager#clearAds(String sid)
-```
+----
+
 .インタフェース変更
-```java
+[source, java]
+----
 //変更前
 AMoAdNativeViewManager#prepareAd(String sid, String tag, ...)
 
 //変更後
 AMoAdNativeViewManager#prepareAd(String sid, ...)
-```
+----
 
 Ver 3.1.0 beta 4 hotfix3::
 * リストビュー型のclearAdのバグ対応
@@ -109,13 +131,14 @@ Ver 3.1.0 beta 4::
 Ver 3.1.0 beta 3 hotfix3::
 . 管理画面に設定した広告表示位置の間隔(interval)が効かないバグ対応
 . AMoAdNativeFailureListenerのインターフェース変更
-```java
+[source, java]
+----
 //変更前
 pubilc void onFailed(String sid, String tag);
 
 //変更後
 pubilc void onFailure(String sid, String tag, View templateView);
-```
+----
 
 Ver 3.1.0 beta 3 hotfix2::
 * isExternalStorageRemovableのバグでNullPointExceptionが発生(一部の端末で発生)
@@ -128,48 +151,48 @@ Ver 3.1.0 beta 3 変更内容::
 . 既存のViewに広告情報をセットするrenderAd関数を追加
 . 不要になった広告を明示的にクリアするためのclearAd関数を追加
 . 広告の取得失敗の検知リスナーを設定可能
-```java
+[source, java]
+----
 View view = AMoAdNativeViewManager.getInstance(context).createView(sid, tag, R.layout.template, new AMoAdNativeFailureListener() {
   @Override
   public void onFailed(String sid, String tag) {
     // 広告の取得失敗を検知
   }
   });
-```
-= AMoAd SDK for Android
+----
 
-== ネイティブ広告
-=== ネイティブApp
+== マニュアル
 
-* link:Documents/Native/Overview_nativeApp.asciidoc[概要]
-* link:Documents/Native/Guide_nativeApp.asciidoc[導入ガイド]
+=== *ドキュメント*
+* link:Documents/OVERVIEW.asciidoc[AMoAd広告の概要]
+* *link:Documents/INSTALL.asciidoc[AMoAdSDKの挿入]*
+* *link:Documents/PROGRAMMING.asciidoc[AMoAdSDKのプログラミン]*
 
-=== リストビュー
-* link:Documents/Native/Overview_listView.asciidoc[概要]
-* link:Documents/Native/Guide_listView.asciidoc[導入ガイド]
+=== *モジュール*
+* *link:Module/AMoAd.jar[AMoAd.jar]*
+* link:https://rawgit.com/amoad/amoad-android-sdk/master/Documents/javadoc/index.html[java document]
 
-=== モジュール ダウンロード
-[horizontal]
-link:https://github.com/amoad/amoad-android-sdk/raw/master/Modules/AMoAd.jar[AMoAd.jar]::
-ライブラリ
-link:https://rawgit.com/amoad/amoad-android-sdk/master/Documents/Native/javadoc/index.html[javadoc]::
-Javaドキュメント
+=== *サンプルアプリ*
+==== バナーのサンプルアプリ
+** link:https://github.com/amoad/amoad-android-sdk/tree/master/Samples/AMoAdSample[AMoAdSample] +
+バナー広告のサンプルアプリ
 
-=== サンプルアプリ
-[horizontal]
-link:https://github.com/amoad/amoad-android-sdk/tree/master/Samples/AMoAdNativeAppTextSample[AMoAdNativeAppTextSample]::
-ネイティブApp型の「テキスト広告」のサンプルアプリ
-link:https://github.com/amoad/amoad-android-sdk/tree/master/Samples/AMoAdNativeAppIconTextSample[AMoAdNativeAppIconTextSample]::
-ネイティブApp型の「アイコン画像+テキスト広告」のサンプルアプリ
-link:https://github.com/amoad/amoad-android-sdk/tree/master/Samples/AMoAdNativeAppImageTextSample[AMoAdNativeAppImageTextSample]::
-ネイティブApp型の「メイン画像+テキスト広告」のサンプルアプリ
-link:https://github.com/amoad/amoad-android-sdk/tree/master/Samples/AMoAdNativeAppImageTextSample_CustomClick[AMoAdNativeAppImageTextSample_CustomClick]::
-ネイティブApp型の「メイン画像+テキスト広告」のサンプルアプリ、クリック領域の設定
-link:https://github.com/amoad/amoad-android-sdk/tree/master/Samples/AMoAdNativeListViewTextSample[AMoAdNativeAppTextSample]::
-リストビュー型の「テキスト広告」のサンプルアプリ
-link:https://github.com/amoad/amoad-android-sdk/tree/master/Samples/AMoAdNativeListViewIconTextSample[AMoAdNativeAppIconTextSample]::
-リストビュー型の「アイコン画像+テキスト広告」のサンプルアプリ
-link:https://github.com/amoad/amoad-android-sdk/tree/master/Samples/AMoAdNativeListViewImageTextSample[AMoAdNativeAppImageTextSample]::
-リストビュー型の「メイン画像+テキスト広告」のサンプルアプリ
-link:https://github.com/amoad/amoad-android-sdk/tree/master/Samples/AMoAdNativeListViewImageTextSample_CustomClick[AMoAdNativeListViewImageTextSample_CustomClick]::
-リストビュー型の「メイン画像+テキスト広告」のサンプルアプリ、クリック領域の設定
+==== ネイティブAppのサンプルアプリ
+** link:https://github.com/amoad/amoad-android-sdk/tree/master/Samples/AMoAdNativeAppTextSample[AMoAdNativeAppTextSample] +
+ネイティブAppの「テキスト広告」のサンプルアプリ
+** link:https://github.com/amoad/amoad-android-sdk/tree/master/Samples/AMoAdNativeAppIconTextSample[AMoAdNativeAppIconTextSample] +
+ネイティブAppの「アイコン画像+テキスト広告」のサンプルアプリ
+** link:https://github.com/amoad/amoad-android-sdk/tree/master/Samples/AMoAdNativeAppImageTextSample[AMoAdNativeAppImageTextSample] +
+ネイティブAppの「メイン画像+テキスト広告」のサンプルアプリ
+** link:https://github.com/amoad/amoad-android-sdk/tree/master/Samples/AMoAdNativeAppImageTextSample_CustomClick[AMoAdNativeAppImageTextSample_CustomClick] +
+ネイティブAppの「メイン画像+テキスト広告」のサンプルアプリ、クリック領域の設定
+
+==== リストビューのサンプルアプリ
+** link:https://github.com/amoad/amoad-android-sdk/tree/master/Samples/AMoAdNativeListViewTextSample[AMoAdNativeAppTextSample] +
+リストビューの「テキスト広告」のサンプルアプリ
+** link:https://github.com/amoad/amoad-android-sdk/tree/master/Samples/AMoAdNativeListViewIconTextSample[AMoAdNativeAppIconTextSample] +
+リストビューの「アイコン画像+テキスト広告」のサンプルアプリ
+** link:https://github.com/amoad/amoad-android-sdk/tree/master/Samples/AMoAdNativeListViewImageTextSample[AMoAdNativeAppImageTextSample] +
+リストビューの「メイン画像+テキスト広告」のサンプルアプリ
+** link:https://github.com/amoad/amoad-android-sdk/tree/master/Samples/AMoAdNativeListViewImageTextSample_CustomClick[AMoAdNativeListViewImageTextSample_CustomClick] +
+リストビューの「メイン画像+テキスト広告」のサンプルアプリ、クリック領域の設定
